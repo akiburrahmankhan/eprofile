@@ -1,0 +1,960 @@
+/* ==========================================================================
+   Akibur Rahman Khan — Academic Portfolio
+   Design tokens
+   ========================================================================== */
+
+:root {
+  --bg: #faf6ed;
+  --bg-alt: #f1ead9;
+  --paper: #fffdf8;
+  --ink: #201d18;
+  --ink-soft: #55503f;
+  --ink-faint: #8a8168;
+  --rust: #b85c38;
+  --rust-deep: #96432a;
+  --green: #2f4a3c;
+  --green-deep: #1f3329;
+  --line: #ddd3ba;
+  --line-strong: #c7b99a;
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --max-w: 1180px;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Running head — a signature device borrowed from the CV's own page
+   headers ("Akibur Rahman Khan · Curriculum Vitae · Page X of 4"),
+   reused here as a marginal section label.
+   ========================================================================== */
+
+.running-head {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+.running-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.running-head span.section-no {
+  color: var(--rust);
+}
+
+/* ==========================================================================
+   Skip link
+   ========================================================================== */
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.75rem 1.25rem;
+  z-index: 999;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 237, 0.86);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.site-nav.is-scrolled {
+  box-shadow: 0 4px 24px rgba(32, 29, 24, 0.06);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0.95rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.nav-mark {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.nav-mark strong {
+  font-weight: 600;
+  color: var(--rust-deep);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 1.9rem);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0.4rem 0.1rem;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 1px;
+  background: var(--rust);
+  transition: right 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  right: 0;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 0.4rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 8vw, 6rem);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust-deep);
+  margin-bottom: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--rust-deep);
+}
+
+.hero h1 {
+  font-size: clamp(2.9rem, 6.6vw, 5.1rem);
+  line-height: 0.98;
+  font-weight: 560;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rust-deep);
+}
+
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: var(--green-deep);
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line-strong);
+  max-width: 30rem;
+}
+
+.hero-intro {
+  margin-top: 1.4rem;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 0.95rem 1.6rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--rust-deep);
+  border-color: var(--rust-deep);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.hero-photo-wrap {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.hero-photo-frame {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  padding: 14px;
+  background: var(--paper);
+  box-shadow: 0 30px 60px -25px rgba(32, 29, 24, 0.35);
+}
+
+.hero-photo-frame img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(8%) contrast(1.02);
+}
+
+.hero-photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.85rem;
+  text-align: center;
+}
+
+.hero-photo-tag {
+  position: absolute;
+  top: -14px;
+  right: -18px;
+  background: var(--green-deep);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.7rem;
+  transform: rotate(2deg);
+}
+
+/* ==========================================================================
+   Section scaffolding
+   ========================================================================== */
+
+section {
+  padding: clamp(4rem, 9vw, 6.5rem) 0;
+  scroll-margin-top: 76px;
+}
+
+.section-alt {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head {
+  margin-bottom: 3rem;
+  max-width: 44rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  font-weight: 560;
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rust-deep);
+}
+
+.section-dek {
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  max-width: 38rem;
+}
+
+/* reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.about-copy p {
+  color: var(--ink-soft);
+  margin: 0 0 1.1rem;
+  font-size: 1.04rem;
+}
+
+.about-copy p:first-child {
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.fact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.fact-list li {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.fact-list dt,
+.fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+.fact-value {
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Timeline (Experience)
+   ========================================================================== */
+
+.timeline {
+  border-top: 1px solid var(--line-strong);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: clamp(1.2rem, 4vw, 3rem);
+  padding: 2.2rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--rust-deep);
+  padding-top: 0.25rem;
+}
+
+.timeline-role {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 560;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-org {
+  color: var(--green-deep);
+  font-weight: 600;
+  font-size: 0.98rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-loc {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Education
+   ========================================================================== */
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+
+.edu-card {
+  background: var(--paper);
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.edu-year {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+.edu-degree {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 560;
+  line-height: 1.3;
+}
+
+.edu-inst {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+.edu-merit {
+  margin-top: 0.4rem;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  border: 1px solid var(--green-deep);
+  padding: 0.28rem 0.6rem;
+}
+
+/* ==========================================================================
+   Research
+   ========================================================================== */
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.research-card {
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  padding: 2rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.research-card:hover {
+  border-color: var(--rust);
+  transform: translateY(-3px);
+}
+
+.research-scope {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--rust-deep);
+  margin-bottom: 0.9rem;
+}
+
+.research-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 560;
+  line-height: 1.35;
+  margin-bottom: 0.85rem;
+}
+
+.research-meta {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.research-meta strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Citation-style lists (Publications, Conferences, Book contribution)
+   ========================================================================== */
+
+.citation-list {
+  border-top: 1px solid var(--line-strong);
+}
+
+.citation-item {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr;
+  gap: 1.4rem;
+  padding: 1.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.citation-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--rust);
+  padding-top: 0.15rem;
+}
+
+.citation-title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 560;
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.citation-source {
+  color: var(--green-deep);
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.citation-meta {
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+}
+
+.citation-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--rust-deep);
+  border-bottom: 1px solid var(--rust-deep);
+}
+
+.citation-link:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Conference presentations reuse the citation list with a venue line */
+.citation-venue {
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Service & Professional Development
+   ========================================================================== */
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.simple-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.simple-list li {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 0.9rem;
+}
+
+.simple-list li::before {
+  content: "—";
+  color: var(--rust);
+  flex-shrink: 0;
+}
+
+.simple-list strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.list-subhead {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.5rem;
+}
+
+/* membership badges */
+.membership-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2.5rem;
+}
+
+.membership-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line-strong);
+  padding: 0.5rem 0.85rem;
+  color: var(--ink-soft);
+  background: var(--paper);
+}
+
+.membership-badge strong {
+  color: var(--green-deep);
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contact-section {
+  background: var(--green-deep);
+  color: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.contact-section .section-dek { color: rgba(250, 246, 237, 0.72); }
+.contact-section .running-head { color: rgba(250, 246, 237, 0.55); }
+.contact-section .running-head::after { background: rgba(250, 246, 237, 0.25); }
+.contact-section .section-title { color: var(--bg); }
+.contact-section .section-title em { color: #e2a884; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.contact-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.45;
+  font-weight: 400;
+  max-width: 30rem;
+}
+
+.contact-lead em {
+  font-style: italic;
+  color: #e2a884;
+}
+
+.contact-links {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  border-top: 1px solid rgba(250, 246, 237, 0.2);
+}
+
+.contact-links li {
+  border-bottom: 1px solid rgba(250, 246, 237, 0.2);
+  padding: 1.1rem 0;
+}
+
+.contact-links a {
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contact-links a:hover {
+  color: #e2a884;
+}
+
+.contact-arrow {
+  color: #e2a884;
+  transition: transform 0.25s ease;
+}
+
+.contact-links a:hover .contact-arrow {
+  transform: translateX(4px);
+}
+
+.contact-affil {
+  border-left: 1px solid rgba(250, 246, 237, 0.25);
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.contact-affil h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 237, 0.55);
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.contact-affil p {
+  margin: 0 0 1.2rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(250, 246, 237, 0.86);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  background: var(--green-deep);
+  color: rgba(250, 246, 237, 0.55);
+  border-top: 1px solid rgba(250, 246, 237, 0.15);
+  padding: 1.6rem 0 2.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 880px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-photo-wrap {
+    order: -1;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .about-grid,
+  .two-col,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-affil {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(250, 246, 237, 0.25);
+    padding-top: 1.5rem;
+  }
+
+  .edu-grid,
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: fixed;
+    inset: 60px 0 auto 0;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 1rem var(--gutter) 1.5rem;
+    border-bottom: 1px solid var(--line);
+    display: none;
+    gap: 0.2rem;
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+  }
+
+  .timeline-item,
+  .fact-list li,
+  .citation-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .citation-num {
+    order: -1;
+  }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
+}
