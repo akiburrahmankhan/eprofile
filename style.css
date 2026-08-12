@@ -485,27 +485,62 @@ section {
 }
 
 /* ==========================================================================
-   Timeline (Experience)
+   Vertical (up-down) Timeline — shared by Experience and Education
    ========================================================================== */
 
-.timeline {
-  border-top: 1px solid var(--line-strong);
+.vtimeline {
+  position: relative;
+  max-width: 46rem;
+  padding-left: clamp(2.4rem, 6vw, 3.4rem);
 }
 
-.timeline-item {
-  display: grid;
-  grid-template-columns: 9rem 1fr;
-  gap: clamp(1.2rem, 4vw, 3rem);
-  padding: 2.2rem 0;
-  border-bottom: 1px solid var(--line);
+.vtimeline::before {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 0.3rem;
+  width: 1px;
+  background: var(--line-strong);
 }
 
-.timeline-year {
+.vtimeline-item {
+  position: relative;
+  padding-bottom: clamp(2.2rem, 5vw, 3rem);
+}
+
+.vtimeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.vtimeline-dot {
+  position: absolute;
+  top: 0.3rem;
+  left: calc(clamp(2.4rem, 6vw, 3.4rem) * -1 + 0.05rem);
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--rust);
+}
+
+.section-alt .vtimeline-dot {
+  background: var(--bg-alt);
+}
+
+.vtimeline-year {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--rust-deep);
-  padding-top: 0.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.vtimeline-content {
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  padding: 1.6rem 1.8rem;
 }
 
 .timeline-role {
@@ -529,49 +564,22 @@ section {
   letter-spacing: 0.03em;
 }
 
-/* ==========================================================================
-   Education
-   ========================================================================== */
-
-.edu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5px;
-  background: var(--line-strong);
-  border: 1px solid var(--line-strong);
-}
-
-.edu-card {
-  background: var(--paper);
-  padding: 2.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.edu-year {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-}
-
 .edu-degree {
   font-family: var(--font-display);
   font-size: 1.28rem;
   font-weight: 560;
-  line-height: 1.3;
+  line-height: 1.35;
+  margin-bottom: 0.4rem;
 }
 
 .edu-inst {
   color: var(--ink-soft);
   font-size: 0.96rem;
+  margin: 0 0 0.6rem;
 }
 
 .edu-merit {
-  margin-top: 0.4rem;
   display: inline-flex;
-  align-self: flex-start;
   align-items: center;
   gap: 0.4rem;
   font-family: var(--font-mono);
@@ -929,9 +937,16 @@ section {
     padding-top: 1.5rem;
   }
 
-  .edu-grid,
   .research-grid {
     grid-template-columns: 1fr;
+  }
+
+  .vtimeline {
+    padding-left: 2rem;
+  }
+
+  .vtimeline-dot {
+    left: -2rem;
   }
 }
 
@@ -961,11 +976,14 @@ section {
     display: inline-block;
   }
 
-  .timeline-item,
   .fact-list li,
   .citation-item {
     grid-template-columns: 1fr;
     gap: 0.4rem;
+  }
+
+  .vtimeline-content {
+    padding: 1.3rem 1.4rem;
   }
 
   .citation-num {
