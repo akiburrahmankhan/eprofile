@@ -67,4 +67,84 @@
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
+
+  // Gallery slider
+  var galleryEl = document.querySelector("[data-gallery]");
+  if (galleryEl) {
+    var track = galleryEl.querySelector("[data-track]");
+    var slides = Array.prototype.slice.call(galleryEl.querySelectorAll(".gallery-slide"));
+    var dots = Array.prototype.slice.call(galleryEl.querySelectorAll(".gallery-dot"));
+    var prevBtn = galleryEl.querySelector("[data-prev]");
+    var nextBtn = galleryEl.querySelector("[data-next]");
+    var index = 0;
+    var total = slides.length;
+    var autoplayDelay = 6000;
+    var autoplayTimer = null;
+
+    function goTo(i) {
+      index = (i + total) % total;
+      track.style.transform = "translateX(-" + index * 100 + "%)";
+      slides.forEach(function (s, si) {
+        s.classList.toggle("is-active", si === index);
+      });
+      dots.forEach(function (d, di) {
+        d.classList.toggle("is-active", di === index);
+      });
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = window.setInterval(next, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    if (nextBtn) nextBtn.addEventListener("click", function () { next(); startAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener("click", function () { prev(); startAutoplay(); });
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () {
+        goTo(i);
+        startAutoplay();
+      });
+    });
+
+    // Keyboard navigation when the slider has focus
+    galleryEl.setAttribute("tabindex", "0");
+    galleryEl.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { next(); startAutoplay(); }
+      if (e.key === "ArrowLeft") { prev(); startAutoplay(); }
+    });
+
+    // Touch swipe support
+    var touchStartX = null;
+    track.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+      stopAutoplay();
+    }, { passive: true });
+
+    track.addEventListener("touchend", function (e) {
+      if (touchStartX === null) return;
+      var deltaX = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) > 40) {
+        if (deltaX < 0) { next(); } else { prev(); }
+      }
+      touchStartX = null;
+      startAutoplay();
+    }, { passive: true });
+
+    galleryEl.addEventListener("mouseenter", stopAutoplay);
+    galleryEl.addEventListener("mouseleave", startAutoplay);
+
+    goTo(0);
+    startAutoplay();
+  }
 })();
