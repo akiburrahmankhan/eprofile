@@ -318,7 +318,7 @@ button:focus-visible {
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 210px;
+  max-width: 320px;
 }
 
 .hero-photo-frame {
@@ -1160,7 +1160,7 @@ section {
 
   .hero-photo-wrap {
     order: -1;
-    max-width: 190px;
+    max-width: 240px;
     margin: 0 auto;
   }
 
