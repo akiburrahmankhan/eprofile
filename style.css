@@ -323,6 +323,8 @@ button:focus-visible {
 
 .hero-photo-frame {
   position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border: 3px solid var(--paper);
   outline: 1px solid var(--line-strong);
   border-radius: 50%;
@@ -333,20 +335,11 @@ button:focus-visible {
 
 .hero-photo-frame img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
+  border-radius: 50%;
   object-fit: cover;
   display: block;
   filter: grayscale(8%) contrast(1.02);
-}
-
-.hero-photo-caption {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 0.85rem;
-  text-align: center;
 }
 
 .hero-photo-tag {
