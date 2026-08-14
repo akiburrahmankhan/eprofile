@@ -227,7 +227,7 @@ button:focus-visible {
 
 .hero {
   position: relative;
-  padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.25rem, 3.5vw, 2.25rem) 0 clamp(1.25rem, 3.5vw, 2.25rem);
   overflow: hidden;
 }
 
@@ -242,7 +242,7 @@ button:focus-visible {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   line-height: 0.98;
   font-weight: 560;
 }
@@ -318,21 +318,24 @@ button:focus-visible {
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 280px;
+  max-width: 210px;
 }
 
 .hero-photo-frame {
   position: relative;
-  border: 1px solid var(--line-strong);
-  padding: 14px;
+  border: 3px solid var(--paper);
+  outline: 1px solid var(--line-strong);
+  border-radius: 50%;
+  overflow: hidden;
   background: var(--paper);
-  box-shadow: 0 30px 60px -25px rgba(32, 29, 24, 0.35);
+  box-shadow: 0 16px 32px -18px rgba(32, 29, 24, 0.35);
 }
 
 .hero-photo-frame img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  display: block;
   filter: grayscale(8%) contrast(1.02);
 }
 
@@ -529,6 +532,17 @@ section {
   font-size: 1.4rem;
   font-weight: 560;
   margin-bottom: 0.35rem;
+}
+
+.timeline-role a {
+  color: var(--rust-deep);
+  border-bottom: 1px solid var(--rust-deep);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.timeline-role a:hover {
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .timeline-org {
@@ -1153,7 +1167,7 @@ section {
 
   .hero-photo-wrap {
     order: -1;
-    max-width: 260px;
+    max-width: 190px;
     margin: 0 auto;
   }
 
